@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Glide
                 .with(this)
                 .load("https://uh.gsstatic.es/sfAttachPlugin/860817.jpg")
-                .apply(RequestOptions.bitmapTransform(new SepiaFilterTransformation())) 
+                .apply(RequestOptions.bitmapTransform(new SepiaFilterTransformation()))
                 .into(img3);
 
         Glide
