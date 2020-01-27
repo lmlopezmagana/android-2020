@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -37,13 +39,31 @@ public class MainActivity extends ListActivity {
 //        setListAdapter(adapter);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.github.com")
+                .baseUrl("http://api.github.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         service = retrofit.create(GitHubService.class);
 
-        new LoadDataTask().execute("lmlopezmagana");
+        // new LoadDataTask().execute("lmlopezmagana");
+
+        Call<List<Repo>> llamada = service.listRepos("lmlopezmagana");
+
+        llamada.enqueue(new Callback<List<Repo>>() {
+            @Override
+            public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
+                if (response.isSuccessful()) {
+                    cargarDatos(response.body());
+                } else {
+                    Toast.makeText(MainActivity.this, "Se ha producido un error (CODE: " + response.code() +")",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Repo>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Se ha producido un error: "+ t.getLocalizedMessage() ,Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 

@@ -6,14 +6,14 @@ Retrofit es una librería que nos permite crear con mucha facilidad clientes Res
 Para poder usar retrofit, tenemos que añadir la siguiente dependencia gradle:
 
 ```gradle
-implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+implementation 'com.squareup.retrofit2:retrofit:2.7.1'
 ```
 
 En nuestro caso, utilizaremos retrofit junto a Gson, una librería de Google para el tratamiento de JSON. Por tanto, tenemos que añadir dos entradas más:
 
 ```gradle
-implementation 'com.google.code.gson:gson:2.8.5'
-implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+implementation 'com.google.code.gson:gson:2.8.6'
+implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
 ```
 
 Retrofit nos permite transformar un API HTTP en un interfaz Java:
